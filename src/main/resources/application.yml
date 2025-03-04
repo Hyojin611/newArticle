@@ -1,0 +1,20 @@
+#MySQL
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/articles
+    username: ${DB_USER}
+    password: ${DB_PW}
+  sql:
+    init:
+      mode: never
+    # alwoys : 항상, embedded : 내장메모리.., never : 사용안함.
+  jpa:
+    #spring.sql.init \uCD08\uAE30 \uC791\uC5C5 \uD560 \uB54C \uB370\uC774\uD130 \uC0DD\uC131\uC744 \uC5B8\uC81C \uD560\uAC70\uB0D0?
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true

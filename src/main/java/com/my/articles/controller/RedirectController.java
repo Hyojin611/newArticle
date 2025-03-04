@@ -18,14 +18,13 @@ public class RedirectController {
         return "/test/testMain";
     }
 
-    //기본 페이지로 이동
+    // 기본 페이지로 이동
     @GetMapping("page")
     public String view() {
         return "/test/page";
     }
 
-
-    //RequestMapping 사용
+    // RequestMapping 사용
     @RequestMapping(value = "requestMapping",
             method = RequestMethod.GET)
     public String requestMapping(Model model) {
@@ -38,36 +37,38 @@ public class RedirectController {
     public ModelAndView modelAndView(Model model) {
         String msg = "ModelAndView";
         model.addAttribute("msg", msg);
+//        return new ModelAndView("redirect:page");
         return new ModelAndView("/test/page");
     }
 
     @GetMapping("redirectViewFirst")
-    public RedirectView redirectView(
+    public RedirectView redirectViewFirst(
             RedirectAttributes redirectAttributes
     ) {
         String msg = "RedirectView 1";
-        redirectAttributes.addFlashAttribute("msg", msg);
+        redirectAttributes
+                .addFlashAttribute("msg", msg);
         return new RedirectView("/mapping/page");
     }
 
     @GetMapping("redirectViewSecond")
-    public RedirectView redirectViewSecond(
+    public String redirectViewSecond(
             RedirectAttributes redirectAttributes
     ) {
         String msg = "RedirectView 2";
-        redirectAttributes.addFlashAttribute("msg", msg);
-        return new RedirectView("/mapping/page");
+        redirectAttributes
+                .addFlashAttribute("msg", msg);
+        return "redirect:/mapping/page";
     }
-
 
     @GetMapping("naver")
     public String goNaver() {
         return "redirect:http://naver.com";
     }
 
-    @GetMapping("kakao")
+    @GetMapping("react")
     public ModelAndView goKakao() {
-        String url= "redirect:http://localhost:3000";
+        String url = "redirect:http://localhost:3000";
         return new ModelAndView(url);
     }
 }
